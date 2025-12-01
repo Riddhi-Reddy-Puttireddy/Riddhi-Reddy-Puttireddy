@@ -22,4 +22,5 @@ Here are some ideas to get you started:
 3)To not tolerate harassment, discrimination, or bad behavior.
 
 4)To create a trigger alert with technology/apps.
+
 Initial profile README content
