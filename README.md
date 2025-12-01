@@ -1,4 +1,4 @@
-## Hi there 👋
+## Hi, I don't know what I am doing 👋
 
 <!--
 **Riddhi-Reddy-Puttireddy/Riddhi-Reddy-Puttireddy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
