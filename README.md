@@ -16,13 +16,10 @@ Here are some ideas to get you started:
 
 - ✨ Topic: Wellbeing & Safety 
 - ✨Agenda: 
--  To make an app for the Safety and Wellbeing  of all citizens.
--  How to save ourselves when there is a crime or a threat 
-
+-  To make an page for the Safety and Wellbeing  of all citizens.
+-  How to save ourselves when there is a crime, threat or an emergency.
  Save emergency numbers .Police Hotline Numbers,Bank Numbers ,Hospital Numbers ,Trusted Contacts 
- On click on Alert Button  → sends SMS/WhatsApp/email/call alert to trusted contacts 
- On click Police Alert Button → Records Message
- On click Cybercrime Alert Button → Sends SMS/email alert to cybercrime team 
- On click Bank Alert Button → Banks Team gets alert 
- On click Ambulance booking Button → Assigns nearest Ambulance driver
+ 
+ Safety tutorials will be provided
+ 
 Initial profile README content
