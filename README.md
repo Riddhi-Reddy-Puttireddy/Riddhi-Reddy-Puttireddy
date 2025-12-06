@@ -18,7 +18,7 @@ Woman Safety
 Women safety is a major concern .Whether its domestic violence,stalking,harasment ,unfortunately woman go through it.
 Woman Safety Apps in India  
 https://youtu.be/XJ_yyVTKiHg?si=pltW3MEY5Ygd96Mt  
-Self Defence is important for woman .Here are some of the links for the same 
+Self Defence is important for people .Here are some of the links for the same 
 https://youtu.be/jAh0cU1J5zk?si=bgw-dV_HfFaSOi0F
 https://youtu.be/-V4vEyhWDZ0?si=mnJD2-zfmkB52_sD
 
