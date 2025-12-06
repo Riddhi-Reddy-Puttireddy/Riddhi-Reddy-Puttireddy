@@ -12,8 +12,7 @@ As there are chances of cyber fraud happening now a days .Here are some of the s
 https://youtu.be/EHqXMxY4_Nk?si=Ntr6__etWYAiB87o
 
 Home Safety 
-Protect yourself from burglary.Here are the tips  https://youtu.be/3BZL_oyAs0o?si=yiyb0snJLvU5Xfjp
-https://youtu.be/41T-Vj3s7e4?si=alViIFGVefcPDj4l
+Protect yourself from burglary.Here are the tips  https://youtu.be/VBTKbLDmEKY?si=ONa4iA0OX9mGpwYE
  
 Woman Safety    
 Women safety is a major concern .Whether its domestic violence,stalking,harasment ,unfortunately woman go through it.
