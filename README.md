@@ -1,7 +1,7 @@
 ## Hi, I am The Clueless Coder 👋
 
 - ✨ Topic: Wellbeing & Safety 
-- ✨Agenda: 
+- ✨Agenda:
 -  To make an page for the Safety and Wellbeing  of all citizens.
 -  How to save ourselves when there is a crime, threat or an emergency.
 -  Save emergency numbers .Police Hotline Numbers,Bank Numbers ,Hospital Numbers ,Trusted Contacts 
