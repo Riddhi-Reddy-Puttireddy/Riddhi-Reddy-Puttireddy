@@ -32,7 +32,7 @@ Important Emergency numbers in India
 https://www.youtube.com/shorts/ocTetNe4B0Y
 
 # Progress Day 1
-Today I have finished writing my code and created my webpage in 3 and a half hours.
+Today I have finished writing my code and created my webpage in 5 and a half hours.
 Tommorow I will make a presentation and submit my work.
 
 Initial profile README content
