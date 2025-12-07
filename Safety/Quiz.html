@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety and Wellbeing Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #1976d2;
+    }
+
+    .quiz-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .question {
+      font-size: 20px;
+      color: #333;
+    }
+
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+
+    .options li {
+      background-color: #e3f2fd;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .options li:hover {
+      background-color: #bbdefb;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1976d2;
+    }
+
+    .btn {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1565c0;
+    }
+
+    .btn:disabled {
+      background-color: #90caf9;
+      cursor: not-allowed;
+    }
+
+    .selection-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Safety and Wellbeing Quiz</h1>
+
+  <!-- Selection container to choose number of questions -->
+  <div class="selection-container">
+    <label for="question-count">How many questions do you want to answer?</label>
+    <select id="question-count">
+      <option value="5">5 Questions</option>
+      <option value="10">10 Questions</option>
+    </select>
+    <br><br>
+    <button class="btn" onclick="startQuiz(event)" type="button">Start Quiz</button>
+  </div>
+
+  <!-- Quiz container -->
+  <div class="quiz-container" id="quiz-container" style="display:none;">
+    <div id="question-container">
+      <div class="question" id="question-text">Loading...</div>
+      <ul class="options" id="options-list">
+        <!-- Options will be dynamically added here -->
+      </ul>
+    </div>
+
+    <button id="next-button" class="btn" onclick="nextQuestion()" disabled>Next Question</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Quiz Data (we'll randomly select from these questions)
+    const allQuestions = [
+      {
+        question: "What is the emergency number in India for all types of emergencies?",
+        options: ["100", "112", "101", "104"],
+        answer: "112"
+      },
+      {
+        question: "Which of these is an important self-defense technique?",
+        options: ["Running away", "Shouting for help", "Throwing sand", "All of the above"],
+        answer: "All of the above"
+      },
+      {
+        question: "What should you do if you suspect a cyber attack?",
+        options: ["Ignore it", "Report it to the authorities", "Try to fix it yourself", "Delete everything"],
+        answer: "Report it to the authorities"
+      },
+      {
+        question: "What is the first step during a fire emergency?",
+        options: ["Call the fire department", "Use a fire extinguisher", "Stay calm and evacuate", "Save valuables"],
+        answer: "Stay calm and evacuate"
+      },
+      {
+        question: "How should you react when you are approached by a stranger?",
+        options: ["Be friendly", "Ignore them", "Keep a safe distance and stay alert", "Engage in conversation"],
+        answer: "Keep a safe distance and stay alert"
+      },
+      {
+        question: "Which of the following is essential in an emergency?",
+        options: ["A first aid kit", "A mobile phone", "A map", "All of the above"],
+        answer: "All of the above"
+      },
+      {
+        question: "Which of the following can help prevent fire accidents at home?",
+        options: ["Using faulty electrical wires", "Keeping flammable items near the stove", "Keeping fire extinguishers nearby", "Leaving candles unattended"],
+        answer: "Keeping fire extinguishers nearby"
+      },
+      {
+        question: "What is the safest way to travel in a car?",
+        options: ["Wearing a seatbelt", "Not wearing a seatbelt", "Driving fast", "Driving without distractions"],
+        answer: "Wearing a seatbelt"
+      },
+      {
+        question: "What should you do if you hear someone being harassed?",
+        options: ["Ignore it", "Report it to the authorities", "Laugh along", "Join the harassment"],
+        answer: "Report it to the authorities"
+      },
+      {
+        question: "What is the first step when you receive an online scam email?",
+        options: ["Click on the link", "Ignore it", "Report it to the authorities", "Forward it to friends"],
+        answer: "Report it to the authorities"
+      },
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let questionsToAsk = [];
+    let isAnswered = false; // Prevent multiple clicks on options
+
+    // Start quiz function based on selected question count
+    function startQuiz(event) {
+      event.preventDefault(); // Prevent the default action (like form submission)
+
+      const questionCount = parseInt(document.getElementById("question-count").value);
+      
+      // Shuffle the questions and select the number of questions the user wants
+      questionsToAsk = shuffle(allQuestions).slice(0, questionCount);
+
+      // Hide the selection container and show the quiz container
+      document.querySelector('.selection-container').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'block';
+
+      // Reset quiz state
+      currentQuestionIndex = 0;
+      score = 0;
+      loadQuestion();
+    }
+
+    // Shuffle function to randomize the question order
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Load a question
+    function loadQuestion() {
+      const question = questionsToAsk[currentQuestionIndex];
+      const questionText = document.getElementById("question-text");
+      const optionsList = document.getElementById("options-list");
+
+      // Reset the button and flags
+      isAnswered = false;
+      document.getElementById("next-button").disabled = true;
+
+      // Update question text
+      questionText.textContent = question.question;
+
+      // Clear previous options
+      optionsList.innerHTML = "";
+
+      // Add new options
+      question.options.forEach(option => {
+        const li = document.createElement("li");
+        li.textContent = option;
+        li.onclick = () => checkAnswer(option, question.answer, li);
+        optionsList.appendChild(li);
+      });
+    }
+
+    // Check answer
+    function checkAnswer(selectedOption, correctAnswer, optionElement) {
+      if (isAnswered) return; // Prevent multiple answers for the same question
+
+      isAnswered = true;
+
+      // Check if the answer is correct
+      if (selectedOption === correctAnswer) {
+        score++;
+        optionElement.style.backgroundColor = "green";  // Correct answer
+      } else {
+        optionElement.style.backgroundColor = "red";  // Wrong answer
+      }
+
+      // Disable further clicks on the options
+      document.querySelectorAll('.options li').forEach(li => {
+        li.style.pointerEvents = "none";  // Disable further clicks
+      });
+
+      // Enable the Next button
+      document.getElementById("next-button").disabled = false;
+    }
+
+    // Move to next question
+    function nextQuestion() {
+      currentQuestionIndex++;
+
+      // Check if there are more questions
+      if (currentQuestionIndex < questionsToAsk.length) {
+        loadQuestion();
+      } else {
+        showResult();  // End of quiz
+      }
+    }
+
+    // Show quiz result
+    function showResult() {
+      const resultText = document.getElementById("result");
+      resultText.textContent = `You got ${score} out of ${questionsToAsk.length} correct!`;
+
+      // Show the result in different colors based on performance
+      if (score === questionsToAsk.length) {
+        resultText.style.color = "green";
+      } else if (score >= questionsToAsk.length / 2) {
+        resultText.style.color = "orange";
+      } else {
+        resultText.style.color = "red";
+      }
+
+      // Hide next button and question area
+      document.getElementById('next-button').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellbeing and Safety Dashboard</title>
+
+<style>
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    margin: 0;
+    padding: 15px;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #1976d2;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #d32f2f;
+    margin-top: 25px;
+}
+
+h3 {
+    color: #1976d2;
+    margin-top: 20px;
+}
+
+h4 {
+    text-align: center;
+    margin-top: 20px;
+    color: #444;
+}
+
+/* Lists */
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: #fff;
+    border-left: 5px solid #1976d2;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+li:hover {
+    background: #e3f2fd;
+    border-left-color: #0d47a1;
+}
+
+/* Emergency box */
+.emergency-box {
+    margin: 20px 0;
+    padding: 12px 16px;
+    background: #ffebee;
+    border-left: 5px solid #d32f2f;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #b71c1c;
+}
+
+/* Video grid */
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* Video cards */
+.video-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-card iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Section container */
+.category {
+    margin-bottom: 30px;
+}
+
+/* Code Word Alert Button */
+.codeword-box {
+    margin: 20px 0;
+    padding: 12px;
+    background: #fff3e0;
+    border-left: 5px solid #ff9800;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+button:active {
+    background-color: #d32f2f;
+    color: white;
+}
+</style>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<script>
+    // Initialize EmailJS with your user ID
+    emailjs.init("YOUR_USER_ID");  // Replace with your EmailJS user ID
+
+    // Function to send the emergency alert email
+    function sendAlert() {
+        var emailParams = {
+            to_name: "Emergency Contact",  // Replace with your contact's name
+            from_name: "Your Name",  // Replace with your name or identifier
+            message: "I need help. Please reach out to me immediately."
+        };
+
+        // Send email using EmailJS
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
+            .then(function(response) {
+                alert("Emergency message sent!");
+            }, function(error) {
+                alert("Failed to send the message. Please try again.");
+            });
+    }
+
+    // Rapid Press Detection Variables
+    let pressCount = 0;  // To track how many times the button was pressed
+    const pressThreshold = 3;  // How many presses are needed to trigger the alarm (e.g., 3)
+    const timeWindow = 1000;  // Time window in milliseconds (e.g., 1000ms = 1 second)
+    let pressTimer;
+
+    // Function to handle button press
+    function handlePress() {
+        pressCount++;  // Increment the press count
+        
+        // If the button is pressed enough times within the time window, trigger the alert
+        if (pressCount >= pressThreshold) {
+            sendAlert();
+            resetPressCount();  // Reset the counter after triggering the alert
+        }
+
+        // Reset the press count if the time window has passed
+        clearTimeout(pressTimer);
+        pressTimer = setTimeout(resetPressCount, timeWindow);
+    }
+
+    // Function to reset the press count
+    function resetPressCount() {
+        pressCount = 0;  // Reset the counter
+    }
+
+    // Add event listener for a click to trigger the function (better alternative to onmousedown)
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("alertButton").addEventListener("click", handlePress);
+    });
+</script>
+</head>
+
+<body>
+
+<h1>Wellbeing and Safety Dashboard</h1>
+
+<h2>Emergency Contacts in India</h2>
+<h3>[112 Can be used for any type of emergency]</h3>
+
+<div class="category">
+    <h3>Medical Emergency</h3>
+    <ul>
+        <li>108 - Emergency Ambulance [Critical Care]</li>
+        <li>102 - Ambulance Service [Patient Transport]</li>
+    </ul>
+
+    <h3>Police</h3>
+    <ul>
+        <li>100 - Police</li>
+        <li>103/1095 - Traffic Police</li>
+    </ul>
+
+    <h3>Fire Emergency</h3>
+    <ul>
+        <li>101 - Fire</li>
+    </ul>
+
+    <h3>Cybercrime</h3>
+    <ul>
+        <li>1930 - Financial Loss</li>
+        <li>National Cybercrime Reporting Portal - Complaints</li>
+    </ul>
+
+    <h3>Helpline</h3>
+    <ul>
+        <li>1091/181 - Woman Helpline</li>
+        <li>1098 - Child Helpline</li>
+        <li>104 - Health Advice</li>
+    </ul>
+</div>
+
+<h4>How to Keep Yourself Safe</h4>
+
+<!-- INTERNET SAFETY -->
+<div class="category">
+    <h3>Internet Safety</h3>
+    <p>As there are chances of cyber fraud happening nowadays.</p>
+</div>
+
+<!-- HOME SAFETY -->
+<div class="category">
+    <h3>Home Safety</h3>
+    <p>Protect yourself from burglary.</p>
+</div>
+
+<!-- WOMAN SAFETY -->
+<div class="category">
+    <h3>Woman Safety</h3>
+    <p>Women safety is a major concern. Whether it's domestic violence, stalking, harassment, women go through it.</p>
+</div>
+
+<!-- SELF DEFENCE -->
+<div class="category">
+    <h3>Self Defence</h3>
+    <p>Self Defence is important for people to protect themselves.</p>
+</div>
+
+<!-- VIDEO SECTION -->
+<div class="category">
+    <h3>Videos</h3>
+    <div class="video-grid">
+        <!-- Video 1 -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/J7b1PYkA3kY" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/EHqXMxY4_Nk" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 3: Home Safety -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/VBTKbLDmEKY" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 4: Woman Safety -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/XJ_yyVTKiHg" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 5: Self Defence -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/jAh0cU1J5zk" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 6: Self Defence -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/-V4vEyhWDZ0" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 7: Emergency Contact Lock Screen -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/yfmk--uEWNQ" allowfullscreen></iframe>
+        </div>
+
+        <!-- Video 8: Important Emergency Numbers -->
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/ocTetNe4B0Y" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <p>If any video does not play, <a href="https://youtube.com/" target="_blank">watch on YouTube</a>.</p>
+</div>
+
+<!-- Emergency Alert Button -->
+<div class="category">
+    <button id="alertButton">Press Quickly to Trigger Alarm</button>
+</div>
+
+</body>
+</html>
